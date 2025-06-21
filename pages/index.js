@@ -33,16 +33,17 @@ export default function Dashboard() {
                   <th className="px-4 py-2 border-b">อายุ</th>
                   <th className="px-4 py-2 border-b">เพศ</th>
                   <th className="px-4 py-2 border-b">อาชีพ</th>
-                  <th className="px-4 py-2 border-b">คะแนน</th> {/* เพิ่มตรงนี้ */}
+                  <th className="px-4 py-2 border-b">ระดับ</th> {/* เปลี่ยนหัวตาราง */}
                   <th className="px-4 py-2 border-b">วันที่ตอบ</th>
                 </tr>
               </thead>
               <tbody>
                 {data.map((item, index) => {
                   const info = item.personalInfo || {};
-                  const score =
-                    item.results?.nineQ?.score ??
-                    item.results?.st5?.score ??
+                  // ดึง level จากข้อมูล (ถ้าอยู่ใน item.level หรือ item.results.nineQ.level)
+                  const level =
+                    item.results?.nineQ?.level ??
+                    item.level ??
                     '-';
                   const date =
                     item.results?.nineQ?.timestamp ||
@@ -56,7 +57,7 @@ export default function Dashboard() {
                       <td className="px-4 py-2 border-b">{info.age || '-'}</td>
                       <td className="px-4 py-2 border-b">{info.gender || '-'}</td>
                       <td className="px-4 py-2 border-b">{info.occupation || '-'}</td>
-                      <td className="px-4 py-2 border-b">{score}</td> {/* เพิ่มตรงนี้ */}
+                      <td className="px-4 py-2 border-b">{level}</td> {/* เปลี่ยนตรงนี้ */}
                       <td className="px-4 py-2 border-b">
                         {date ? new Date(date).toLocaleString('th-TH') : '-'}
                       </td>
